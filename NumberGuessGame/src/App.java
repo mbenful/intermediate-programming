@@ -3,60 +3,74 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-    
-    System.out.println("Guess the number I am thinking about between 1 and 100.");
-    Random random = new Random();
-   int a = 5;
-    int number = random.nextInt(100) + 1;
-    Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-ArrayList<Integer> pastGuess = new ArrayList<>();
-    //make it a while loop
-    while (true) {
-        while ( a > 0) {
-            System.out.println("You have " + a + " attempts");
-    if (sc.hasNextInt()) {
-        int guess = sc.nextInt();
         
-        if (pastGuess.contains(guess)) {
-            System.out.println("You already guessed " + guess + "! Try again");
-            continue;
-        }
-
-        pastGuess.add(guess);
-        if ( checkInt(guess, number)){
-            return;
-        }
-        a--;
-
-    } 
-   else {
-        String bad = sc.next();
-        System.out.println(bad + " is a bad input! Try again");
-    }
-    if(a==0) {
-        System.out.println("SORRY, you ran out of guesses! GAME OVER!");
-        return;
-    }
-    }
-}
-}
-
-static boolean checkInt(int guess, int number)  {
-    if (guess == number){
-        System.out.println("Correct!!");
-        return true;
-          }
-        else if (guess > number){
-        System.out.println("lower");
-             }
-             else if (guess < number){
-                 System.out.println("higher");
-                     }
-        return false;
-
+        int lowerNum = 0, upperNum = 0;
+        while (true) {
+            System.out.println("Enter the lower number of the range: ");
+            if (sc.hasNextInt()) {
+                lowerNum = sc.nextInt();
+                System.out.println("Enter the upper number of the range: ");
+                if (sc.hasNextInt()) {
+                    upperNum = sc.nextInt();
+                    if (lowerNum >= upperNum) {
+                        System.out
+                                .println("Invalid range! Lower number must be less than the upper number. Try again.");
+                    } else {
+                        break; 
                     }
+                } else {
+                    System.out.println(sc.next() + " is not a valid number. Try again.");
+                }
+            } else {
+                System.out.println(sc.next() + " is not a valid number. Try again.");
+            }
+        }
+
+       
+        Random random = new Random();
+        int number = random.nextInt(upperNum - lowerNum + 1) + lowerNum;
+
+        ArrayList<Integer> pastGuesses = new ArrayList<>();
+        System.out.println("I have picked a number between " + lowerNum + " and " + upperNum + ". Try to guess it!");
+
+        
+        while (true) {
+            System.out.println("Enter your guess: ");
+            if (sc.hasNextInt()) {
+                int guess = sc.nextInt();
+
+                if (pastGuesses.contains(guess)) {
+                    System.out.println("You already guessed " + guess + "! Try again.");
+                    continue;
+                }
+
+                pastGuesses.add(guess);
+
+                if (checkGuess(guess, number)) {
+                    System.out
+                            .println("Congrats! You guessed the number in " + pastGuesses.size() + " attempts.");
+                    break;
+                }
+            } else {
+                System.out.println(sc.next() + " is not a valid number, try again");
+            }
+        }
+
+        sc.close();
+    }
+
+    
+    static boolean checkGuess(int guess, int number) {
+        if (guess == number) {
+            return true;
+        } else if (guess > number) {
+            System.out.println("Lower");
+        } else {
+            System.out.println("Higher");
+        }
+        return false;
+    }
 }
-
-

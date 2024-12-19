@@ -75,18 +75,15 @@ public class Quiz {
                                 Base);
 
 
-                
-                // For each question, ask, read input, store answer.
                 gameIntro();
                 Question[] qList = { q1, q2 ,q3, q4, q5, q6, q7, q8};
                 for (Question q : qList) {
                         Category c = q.ask(sc);
                         c.points++;
                 }
-                // Get most common category from the questions asked
-                // Return Category
+                
                 Category[] cList = { Base, Basket, Tennis, Soccer };
-                // these need to be in the same order or the points will be incorrect!
+                
                 int index = getMostPopularCatIndex(cList);
                 System.out.println("If you were a sport, you would be " + cList[index].label + ". ");
                 System.out.println(cList[index].description);
@@ -94,18 +91,31 @@ public class Quiz {
         }
 
         public static void gameIntro() {
-                // requires 1 to keep going
+                Scanner sc = new Scanner(System.in); // Ensure Scanner is declared
                 System.out.println("What sport are you, Buzzfeed Quiz");
                 System.out.println("You must choose numbers 1-4 for every question. Enter '1' to play!");
-                int play = sc.nextInt();
-                if (play != 1) {
-                        System.out.println("Unidentifiable input. Please enter '1' to play");
-                        gameIntro();
+            
+                boolean validInput = false;
+            
+                while (!validInput) {
+                    System.out.print("Enter a number: ");
+                   
+                    if (sc.hasNextInt()) {
+                        int play = sc.nextInt();
+                        if (play == 1) {
+                            validInput = true;
+                            System.out.println("Let's play!");
+                        } else {
+                            System.out.println("Unidentifiable input. Please enter '1' to play.");
+                        }
+                    } else {
+                        System.out.println("Invalid input. Please enter a number!");
+                        sc.next(); 
+                    }
                 }
-        }
+            }
 
-        // returns the index that is the max
-        // the tie breaker is the first Category that has the count is the "max" :/ 
+
         public static int getMostPopularCatIndex(Category[] counts) {
                 int maxCount = 0;
                 int maxIndex = 0;

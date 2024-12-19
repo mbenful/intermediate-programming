@@ -1,0 +1,120 @@
+
+/*
+ * Irene Feng Nov 2022
+ * This is the class where we create the Quiz and run it. It has the main method.  
+ */
+import java.util.Scanner;
+
+public class Quiz {
+        static Scanner sc = new Scanner(System.in);
+
+        public static void main(String[] args) throws Exception {
+                // Create Categories
+                Category Tennis = new Category("Tennis",
+                                "You like Tennis.");
+                Category Base = new Category("Baseball", "You like Baseball");
+                Category Basket= new Category("Basketball",
+                                "You like Basketball");
+                Category Soccer = new Category("Soccer", "You like Soccer.");
+                // Create Questions
+                Question q1 = new Question("What is your favorite Brand?");
+                // Attach Answers to Questions
+                q1.possibleAnswers[0] = new Answer("Adidas", Soccer);
+                q1.possibleAnswers[1] = new Answer("Under Armour",
+                                Base);
+                q1.possibleAnswers[2] = new Answer("Nike", Basket);
+                q1.possibleAnswers[3] = new Answer("Polo", Tennis);
+
+                Question q2 = new Question("What is your favorite pre-game snack?");
+                q2.possibleAnswers[0] = new Answer("Granola", Tennis);
+                q2.possibleAnswers[1] = new Answer("Sunflower Seeds", Base);
+                q2.possibleAnswers[2] = new Answer("PB&J", Basket);
+                q2.possibleAnswers[3] = new Answer("Plantain",
+                                Soccer);
+
+                // ... more questions here
+                Question q3 = new Question("Favorite Celebration?");
+                q3.possibleAnswers[0] = new Answer("Hang up the telephone", Tennis);
+                q3.possibleAnswers[1] = new Answer("Drop the mic", Base);
+                q3.possibleAnswers[2] = new Answer("Ice in veins", Basket);
+                q3.possibleAnswers[3] = new Answer("Sui", Soccer);
+
+
+                Question q4 = new Question("What is your favorite city to travel to?");
+                q4.possibleAnswers[0] = new Answer("London", Soccer);
+                q4.possibleAnswers[1] = new Answer("New York", Base);
+                q4.possibleAnswers[2] = new Answer("L.A", Basket);
+                q4.possibleAnswers[3] = new Answer("Madrid", Tennis);
+
+                Question q5 = new Question("What is your favorite car?");
+                q5.possibleAnswers[0] = new Answer("Porsche", Tennis);
+                q5.possibleAnswers[1] = new Answer("Dodge", Base);
+                q5.possibleAnswers[2] = new Answer("Rolls Royce", Basket);
+                q5.possibleAnswers[3] = new Answer("Lambo",
+                                Soccer);
+
+                Question q6 = new Question("What is your favorite color?");
+                q6.possibleAnswers[0] = new Answer("Green", Tennis);
+                q6.possibleAnswers[1] = new Answer("Orange", Base);
+                q6.possibleAnswers[2] = new Answer("Red", Basket);
+                q6.possibleAnswers[3] = new Answer("Blue",
+                                Soccer);
+
+                Question q7 = new Question("What is your favorite Competition?");
+                q7.possibleAnswers[0] = new Answer("1 V 1", Tennis);
+                q7.possibleAnswers[1] = new Answer("Strength Contest", Base);
+                q7.possibleAnswers[2] = new Answer("Small-Group Victory", Basket);
+                q7.possibleAnswers[3] = new Answer("Big-Group Victory",
+                                Soccer);
+
+                Question q8 = new Question("What is your favorite part of playing a game?");
+                q8.possibleAnswers[0] = new Answer("Having fun with others", Basket);
+                q8.possibleAnswers[1] = new Answer("Seeing how well you do", Soccer);
+                q8.possibleAnswers[2] = new Answer("Winning", Tennis);
+                q8.possibleAnswers[3] = new Answer("Cheering other on",
+                                Base);
+
+
+                
+                // For each question, ask, read input, store answer.
+                gameIntro();
+                Question[] qList = { q1, q2 ,q3, q4, q5, q6, q7, q8};
+                for (Question q : qList) {
+                        Category c = q.ask(sc);
+                        c.points++;
+                }
+                // Get most common category from the questions asked
+                // Return Category
+                Category[] cList = { Base, Basket, Tennis, Soccer };
+                // these need to be in the same order or the points will be incorrect!
+                int index = getMostPopularCatIndex(cList);
+                System.out.println("If you were a sport, you would be " + cList[index].label + ". ");
+                System.out.println(cList[index].description);
+
+        }
+
+        public static void gameIntro() {
+                // requires 1 to keep going
+                System.out.println("What sport are you, Buzzfeed Quiz");
+                System.out.println("You must choose numbers 1-4 for every question. Enter '1' to play!");
+                int play = sc.nextInt();
+                if (play != 1) {
+                        System.out.println("Unidentifiable input. Please enter '1' to play");
+                        gameIntro();
+                }
+        }
+
+        // returns the index that is the max
+        // the tie breaker is the first Category that has the count is the "max" :/ 
+        public static int getMostPopularCatIndex(Category[] counts) {
+                int maxCount = 0;
+                int maxIndex = 0;
+                for (int i = 0; i < counts.length; i++) {
+                        if (counts[i].points > maxCount) {
+                                maxCount = counts[i].points;
+                                maxIndex = i;
+                        }
+                }
+                return maxIndex;
+        }
+}

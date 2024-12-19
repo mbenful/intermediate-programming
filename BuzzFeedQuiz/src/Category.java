@@ -1,5 +1,6 @@
 /*
- * Irene Feng 10/12/2022
+ * Michael, Peter, Ahaan
+ *  We all equally worked on this.
  */
 public class Category {
 

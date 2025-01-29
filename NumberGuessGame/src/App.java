@@ -1,3 +1,5 @@
+
+// Copywright 2025 Michael Benful
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;

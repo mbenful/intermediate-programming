@@ -1,3 +1,5 @@
+
+// Copywright 2025 Michael Benful
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -49,7 +51,7 @@ public class FileSave {
     // then writes to file
     public void updateResult(String key, String value) throws Exception {
         /* YOUR CODE HERE: Change this to actually update the results hashmap */
-    
+
         results.put(key, value);
         writeResults();
     }

@@ -3,18 +3,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    //fields
+    // fields
     Scanner sc = new Scanner(System.in);
-        ArrayList<Integer> pastGuesses = new ArrayList<>();
-
- int getScore(){
-return pastGuesses.size(); 
-}
-    public void playGame() {  
-       
-        
-        int lowerNum = 0, upperNum = 0;
-        while (true) {
+    ArrayList<Integer> pastGuesses = new ArrayList<>();
+    public String username;
+        int getScore() {
+            return pastGuesses.size();
+        }
+        public void playGame() {
+    
+            int lowerNum = 0, upperNum = 0;
+            while (true) {
+                
             System.out.println("Enter the lower number of the range: ");
             if (sc.hasNextInt()) {
                 lowerNum = sc.nextInt();
@@ -25,7 +25,7 @@ return pastGuesses.size();
                         System.out
                                 .println("Invalid range! Lower number must be less than the upper number. Try again.");
                     } else {
-                        break; 
+                        break;
                     }
                 } else {
                     System.out.println(sc.next() + " is not a valid number. Try again.");
@@ -35,14 +35,11 @@ return pastGuesses.size();
             }
         }
 
-       
         Random random = new Random();
         int number = random.nextInt(upperNum - lowerNum + 1) + lowerNum;
 
-        
         System.out.println("I have picked a number between " + lowerNum + " and " + upperNum + ". Try to guess it!");
 
-        
         while (true) {
             System.out.println("Enter your guess: ");
             if (sc.hasNextInt()) {
@@ -65,10 +62,8 @@ return pastGuesses.size();
             }
         }
 
-    
     }
 
-    
     static boolean checkGuess(int guess, int number) {
         if (guess == number) {
             return true;

@@ -1,8 +1,9 @@
 // Created by Armin Asl and Michael Benful
 // Enjoy!
+package Store;
+import java.util.ArrayList;
 
 import processing.core.PApplet;
-import java.util.ArrayList;
 
 public class SuperStore extends PApplet {
     Store store;

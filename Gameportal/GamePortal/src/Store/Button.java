@@ -1,6 +1,6 @@
 // Created by Armin Asl and Michael Benful
 // Enjoy!
-
+package Store;
 import processing.core.PApplet;
 
 public class Button {

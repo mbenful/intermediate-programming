@@ -1,6 +1,6 @@
 // Created by Armin Asl and Michael Benful
 // Enjoy!
-
+package Store;
 public class Aircraft extends Item {
     private double emissionsPerMile;
 

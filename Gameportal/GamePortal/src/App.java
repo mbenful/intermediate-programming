@@ -1,5 +1,4 @@
 // Copyright 2025 Michael Benful
-package Quiz;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -18,7 +17,7 @@ public class App {
             System.out.println("Please enter desired username:");
             username = sc.nextLine();
 
-            Quiz whatever = new Quiz();
+            NumberGuessGame whatever = new NumberGuessGame();
             whatever.playGame();
             int currentScoreInt = whatever.getScore();
             String currentScore = Integer.toString(currentScoreInt);

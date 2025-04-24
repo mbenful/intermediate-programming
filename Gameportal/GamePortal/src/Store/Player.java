@@ -1,6 +1,6 @@
 // Created by Armin Asl and Michael Benful
 // Enjoy!
-
+package Store;
 public class Player {
     private long balance;
     private double totalEmissions;

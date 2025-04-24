@@ -6,7 +6,6 @@ import java.util.Scanner;
 import Game.ErrorCheck;
 import Game.Game;
 import Quiz.Quiz;
-import Store.StoreGame;
 
 public class GamePortal {
     static Scanner sc = new Scanner(System.in);

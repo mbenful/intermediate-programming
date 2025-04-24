@@ -1,6 +1,6 @@
 // Created by Armin Asl and Michael Benful
 // Enjoy!
-
+package Store;
 public abstract class Item {
     protected String name;
     protected long price;

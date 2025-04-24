@@ -1,81 +1,130 @@
-// Copyright 2025 Michael Benful
+/*
+ * Michael, Peter, Ahaan Chabba
+ * This is the class where we create the Quiz and run it. It has the main method.  We all equally worked on this.
+ */
 package Quiz;
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Quiz {
-    // fields
-    Scanner sc = new Scanner(System.in);
-    ArrayList<Integer> pastGuesses = new ArrayList<>();
-    public String username;
+        static Scanner sc = new Scanner(System.in);
 
-    int getScore() {
-        return pastGuesses.size();
-    }
+        public static void main(String[] args) throws Exception {
+                // Create Categories
+                Category Tennis = new Category("Tennis",
+                                "You like Tennis.");
+                Category Base = new Category("Baseball", "You like Baseball");
+                Category Basket= new Category("Basketball",
+                                "You like Basketball");
+                Category Soccer = new Category("Soccer", "You like Soccer.");
+                // Create Questions
+                Question q1 = new Question("What is your favorite Brand?");
+                // Attach Answers to Questions
+                q1.possibleAnswers[0] = new Answer("Adidas", Soccer);
+                q1.possibleAnswers[1] = new Answer("Under Armour",
+                                Base);
+                q1.possibleAnswers[2] = new Answer("Nike", Basket);
+                q1.possibleAnswers[3] = new Answer("Polo", Tennis);
 
-    public void playGame() {
+                Question q2 = new Question("What is your favorite pre-game snack?");
+                q2.possibleAnswers[0] = new Answer("Granola", Tennis);
+                q2.possibleAnswers[1] = new Answer("Sunflower Seeds", Base);
+                q2.possibleAnswers[2] = new Answer("PB&J", Basket);
+                q2.possibleAnswers[3] = new Answer("Plantain",
+                                Soccer);
 
-        int lowerNum = 0, upperNum = 0;
-        while (true) {
+                // ... more questions here
+                Question q3 = new Question("Favorite Celebration?");
+                q3.possibleAnswers[0] = new Answer("Hang up the telephone", Tennis);
+                q3.possibleAnswers[1] = new Answer("Drop the mic", Base);
+                q3.possibleAnswers[2] = new Answer("Ice in veins", Basket);
+                q3.possibleAnswers[3] = new Answer("Sui", Soccer);
 
-            System.out.println("Enter the lower number of the range: ");
-            if (sc.hasNextInt()) {
-                lowerNum = sc.nextInt();
-                System.out.println("Enter the upper number of the range: ");
-                if (sc.hasNextInt()) {
-                    upperNum = sc.nextInt();
-                    if (lowerNum >= upperNum) {
-                        System.out
-                                .println("Invalid range! Lower number must be less than the upper number. Try again.");
+
+                Question q4 = new Question("What is your favorite city to travel to?");
+                q4.possibleAnswers[0] = new Answer("London", Soccer);
+                q4.possibleAnswers[1] = new Answer("New York", Base);
+                q4.possibleAnswers[2] = new Answer("L.A", Basket);
+                q4.possibleAnswers[3] = new Answer("Madrid", Tennis);
+
+                Question q5 = new Question("What is your favorite car?");
+                q5.possibleAnswers[0] = new Answer("Porsche", Tennis);
+                q5.possibleAnswers[1] = new Answer("Dodge", Base);
+                q5.possibleAnswers[2] = new Answer("Rolls Royce", Basket);
+                q5.possibleAnswers[3] = new Answer("Lambo",
+                                Soccer);
+
+                Question q6 = new Question("What is your favorite color?");
+                q6.possibleAnswers[0] = new Answer("Green", Tennis);
+                q6.possibleAnswers[1] = new Answer("Orange", Base);
+                q6.possibleAnswers[2] = new Answer("Red", Basket);
+                q6.possibleAnswers[3] = new Answer("Blue",
+                                Soccer);
+
+                Question q7 = new Question("What is your favorite Competition?");
+                q7.possibleAnswers[0] = new Answer("1 V 1", Tennis);
+                q7.possibleAnswers[1] = new Answer("Strength Contest", Base);
+                q7.possibleAnswers[2] = new Answer("Small-Group Victory", Basket);
+                q7.possibleAnswers[3] = new Answer("Big-Group Victory",
+                                Soccer);
+
+                Question q8 = new Question("What is your favorite part of playing a game?");
+                q8.possibleAnswers[0] = new Answer("Having fun with others", Basket);
+                q8.possibleAnswers[1] = new Answer("Seeing how well you do", Soccer);
+                q8.possibleAnswers[2] = new Answer("Winning", Tennis);
+                q8.possibleAnswers[3] = new Answer("Cheering other on",
+                                Base);
+
+
+                gameIntro();
+                Question[] qList = { q1, q2 ,q3, q4, q5, q6, q7, q8};
+                for (Question q : qList) {
+                        Category c = q.ask(sc);
+                        c.points++;
+                }
+                
+                Category[] cList = { Base, Basket, Tennis, Soccer };
+                
+                int index = getMostPopularCatIndex(cList);
+                System.out.println("If you were a sport, you would be " + cList[index].label + ". ");
+                System.out.println(cList[index].description);
+
+        }
+
+        public static void gameIntro() {
+    
+                System.out.println("What sport are you, Buzzfeed Quiz");
+                System.out.println("You must choose numbers 1-4 for every question. Enter '1' to play!");
+            
+                boolean validInput = false;
+            
+                while (!validInput) {
+                    System.out.print("Enter a number: ");
+            
+                    if (sc.hasNextInt()) {
+                        int play = sc.nextInt();
+                        if (play == 1) {
+                            validInput = true;
+                            System.out.println("Let's play!");
+                        } else {
+                            System.out.println("Unidentifiable input. Please enter '1' to play.");
+                        }
                     } else {
-                        break;
+                        System.out.println("Invalid input. Please enter a number!");
+                        sc.next(); 
                     }
-                } else {
-                    System.out.println(sc.next() + " is not a valid number. Try again.");
                 }
-            } else {
-                System.out.println(sc.next() + " is not a valid number. Try again.");
             }
-        }
 
-        Random random = new Random();
-        int number = random.nextInt(upperNum - lowerNum + 1) + lowerNum;
 
-        System.out.println("I have picked a number between " + lowerNum + " and " + upperNum + ". Try to guess it!");
-
-        while (true) {
-            System.out.println("Enter your guess: ");
-            if (sc.hasNextInt()) {
-                int guess = sc.nextInt();
-
-                if (pastGuesses.contains(guess)) {
-                    System.out.println("You already guessed " + guess + "! Try again.");
-                    continue;
+        public static int getMostPopularCatIndex(Category[] counts) {
+                int maxCount = 0;
+                int maxIndex = 0;
+                for (int i = 0; i < counts.length; i++) {
+                        if (counts[i].points > maxCount) {
+                                maxCount = counts[i].points;
+                                maxIndex = i;
+                        }
                 }
-
-                pastGuesses.add(guess);
-
-                if (checkGuess(guess, number)) {
-                    System.out
-                            .println("Congrats! You guessed the number in " + pastGuesses.size() + " attempts.");
-                    break;
-                }
-            } else {
-                System.out.println(sc.next() + " is not a valid number, try again");
-            }
+                return maxIndex;
         }
-
-    }
-
-    static boolean checkGuess(int guess, int number) {
-        if (guess == number) {
-            return true;
-        } else if (guess > number) {
-            System.out.println("Lower");
-        } else {
-            System.out.println("Higher");
-        }
-        return false;
-    }
 }

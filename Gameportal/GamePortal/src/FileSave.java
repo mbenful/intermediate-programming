@@ -1,5 +1,4 @@
 // Copyright 2025 Michael Benful
-package Quiz;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

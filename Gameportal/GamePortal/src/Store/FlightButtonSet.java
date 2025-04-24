@@ -1,6 +1,6 @@
 // Created by Armin Asl and Michael Benful
 // Enjoy!
-
+package Store;
 class FlightButtonSet {
     private SuperStore parent;
     private Destination destination;

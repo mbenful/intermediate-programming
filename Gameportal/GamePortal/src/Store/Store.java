@@ -1,6 +1,6 @@
 // Created by Armin Asl and Michael Benful
 // Enjoy!
-
+package Store;
 import java.util.ArrayList;
 
 public class Store {

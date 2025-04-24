@@ -1,6 +1,7 @@
 // Created by Armin Asl and Michael Benful
 // Enjoy!
 
+package Store;
 public class Destination {
     private String name;
     private int distance; // Distance in miles

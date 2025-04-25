@@ -6,6 +6,7 @@ import java.util.Scanner;
 import Game.ErrorCheck;
 import Game.Game;
 import Quiz.Quiz;
+import Store.SuperStore;
 
 public class GamePortal {
     static Scanner sc = new Scanner(System.in);
@@ -13,7 +14,7 @@ public class GamePortal {
     public static void main(String[] args) {
         HashMap<String, Integer> gameCounts = new HashMap<String, Integer>();
         // writes highscores
-        File f = new File("Highscore.csv");
+        File f = new File("scores.csv");
         while (true) {
             loadGames();
             
@@ -37,7 +38,7 @@ public class GamePortal {
     public static void loadGames() {
         games.clear();
         games.add(new NumberGuessGame());
-        games.add(new StoreGame());
+        games.add(new SuperStore());
         games.add(new Quiz());
     }
 

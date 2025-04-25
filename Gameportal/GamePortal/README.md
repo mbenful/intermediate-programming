@@ -1,3 +1,7 @@
+There are 3 games available: A buzzfeed Quiz, A number guess Game, and Carbon Admission Game
+
+
+
 ## Getting Started
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.

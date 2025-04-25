@@ -3,18 +3,21 @@
  * This is the class where we create the Quiz and run it. It has the main method.  We all equally worked on this.
  */
 package Quiz;
+import java.io.File;
 import java.util.Scanner;
 
-public class Quiz {
-        static Scanner sc = new Scanner(System.in);
+import Game.Game;
 
+public class Quiz implements Game {
+        static Scanner sc = new Scanner(System.in);
+        private static String desc;
+        
+    
         public static void main(String[] args) throws Exception {
                 // Create Categories
-                Category Tennis = new Category("Tennis",
-                                "You like Tennis.");
+                Category Tennis = new Category("Tennis", "You like Tennis.");
                 Category Base = new Category("Baseball", "You like Baseball");
-                Category Basket= new Category("Basketball",
-                                "You like Basketball");
+                Category Basket= new Category("Basketball", "You like Basketball");
                 Category Soccer = new Category("Soccer", "You like Soccer.");
                 // Create Questions
                 Question q1 = new Question("What is your favorite Brand?");
@@ -85,7 +88,8 @@ public class Quiz {
                 Category[] cList = { Base, Basket, Tennis, Soccer };
                 
                 int index = getMostPopularCatIndex(cList);
-                System.out.println("If you were a sport, you would be " + cList[index].label + ". ");
+        desc = cList[index].description;
+        System.out.println("If you were a sport, you would be " + cList[index].description + ". ");
                 System.out.println(cList[index].description);
 
         }
@@ -110,7 +114,7 @@ public class Quiz {
                         }
                     } else {
                         System.out.println("Invalid input. Please enter a number!");
-                        sc.next(); 
+                        sc.next();
                     }
                 }
             }
@@ -127,4 +131,25 @@ public class Quiz {
                 }
                 return maxIndex;
         }
+
+
+    @Override
+    public String getGameName() {
+        return "Buzzfeed Quiz";
+    }
+
+    @Override
+    public void play() {
+        gameIntro();
+    }
+
+    @Override
+    public String getScore() {
+        return (desc);
+    }
+
+    @Override
+    public void writeHighScore(File f) {
+        System.out.println("Buzzfeed Sport saved");
+    }
 }

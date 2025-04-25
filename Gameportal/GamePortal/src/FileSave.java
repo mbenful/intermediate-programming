@@ -50,7 +50,9 @@ public class FileSave {
     // then writes to file
     public void updateResult(String key, String value) throws Exception {
         /* YOUR CODE HERE: Change this to actually update the results hashmap */
-
+if (key == null || value == null) {
+            throw new IllegalArgumentException("Key and value cannot be null");
+        }
         results.put(key, value);
         writeResults();
     }

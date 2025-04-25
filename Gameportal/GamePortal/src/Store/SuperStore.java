@@ -1,11 +1,13 @@
 // Created by Armin Asl and Michael Benful
 // Enjoy!
 package Store;
+import java.io.File;
 import java.util.ArrayList;
 
+import Game.Game;
 import processing.core.PApplet;
 
-public class SuperStore extends PApplet {
+public class SuperStore extends PApplet implements Game{
     Store store;
     Player player;
     Button[] aircraftButtons;
@@ -179,5 +181,26 @@ public class SuperStore extends PApplet {
 
     public static void main(String[] args) {
         PApplet.main("SuperStore");
+    }
+
+    @Override
+    public String getGameName() {
+        return "Super Store";
+    }
+
+    @Override
+    public void play() {
+        String[] args = {"SuperStore"};
+        PApplet.runSketch(args, this);
+    }
+
+    @Override
+    public String getScore() {
+        return String.valueOf(player.getTotalEmissions());
+    }
+
+    @Override
+    public void writeHighScore(File f) {
+        System.out.println("Super Store score saved");
     }
 }

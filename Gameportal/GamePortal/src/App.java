@@ -24,7 +24,7 @@ public class App {
 
             userScores.put(username, currentScore);
 
-            if (whatever.getScore() < highscore) {
+            if (whatever.getScore()  highscore) {
                 highscore = currentScoreInt;
                 System.out.println("new highscore is " + highscore);
             }

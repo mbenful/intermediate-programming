@@ -11,9 +11,29 @@ import Game.Game;
 public class Quiz implements Game {
         static Scanner sc = new Scanner(System.in);
         private static String desc;
+        private static String resultCategory;
         
+        @Override
+        public String getGameName() {
+            return "Sports Personality Quiz";
+        }
     
-        public static void main(String[] args) throws Exception {
+        @Override
+        public void play() {
+            runQuiz();
+        }
+    
+        @Override
+        public String getScore() {
+            return resultCategory != null ? resultCategory : "No result";
+        }
+    
+        @Override
+        public void writeHighScore(File f) {
+            System.out.println("Quiz result saved: " + resultCategory);
+        }
+    
+        private void runQuiz() {
                 // Create Categories
                 Category Tennis = new Category("Tennis", "You like Tennis.");
                 Category Base = new Category("Baseball", "You like Baseball");
@@ -88,6 +108,8 @@ public class Quiz implements Game {
                 Category[] cList = { Base, Basket, Tennis, Soccer };
                 
                 int index = getMostPopularCatIndex(cList);
+                resultCategory = cList[index].label;
+
         desc = cList[index].description;
         System.out.println("If you were a sport, you would be " + cList[index].description + ". ");
                 System.out.println(cList[index].description);
@@ -132,24 +154,4 @@ public class Quiz implements Game {
                 return maxIndex;
         }
 
-
-    @Override
-    public String getGameName() {
-        return "Buzzfeed Quiz";
-    }
-
-    @Override
-    public void play() {
-        gameIntro();
-    }
-
-    @Override
-    public String getScore() {
-        return (desc);
-    }
-
-    @Override
-    public void writeHighScore(File f) {
-        System.out.println("Buzzfeed Sport saved");
-    }
 }

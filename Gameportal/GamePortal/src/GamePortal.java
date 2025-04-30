@@ -1,6 +1,6 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import Game.ErrorCheck;
@@ -10,28 +10,39 @@ import Store.SuperStore;
 
 public class GamePortal {
     static Scanner sc = new Scanner(System.in);
+  public  static String currentUser;
     static ArrayList<Game> games = new ArrayList<Game>();
+    static File scoreFile = new File("scores.csv");
+
     public static void main(String[] args) {
-        HashMap<String, Integer> gameCounts = new HashMap<String, Integer>();
-        // writes highscores
-        File f = new File("scores.csv");
+
+        System.out.print("Welcome, please enter your username: ");
+        currentUser = sc.nextLine();
+
         while (true) {
             loadGames();
-            
-            System.out.println("Which game would you like to play?");
+            System.out.println("Hello " + currentUser + " Which game would you like to play?");
             printGameChoices();
+
             Game g = getGameChoice();
             System.out.println("You're playing " + g.getGameName());
-
             g.play();
-            g.writeHighScore(f);
-            // add one to game counts the hashmap, if you wanted to store some stats.
-            String gameKey = g.getGameName();
-            if (gameCounts.containsKey(gameKey)) {
-                gameCounts.put(gameKey, gameCounts.get(gameKey) + 1);
-            } else {
-                gameCounts.put(gameKey, 1);
+
+            g.writeHighScore(scoreFile);
+            displayScores();
+        }
+    }
+
+    private static void displayScores() {
+        try (Scanner sc = new Scanner(scoreFile)) {
+            System.out.println("Current Leaderboard");
+            System.out.println("USER, Game, Score");
+            while (sc.hasNextLine()) {
+                String[] entry = sc.nextLine().split(",");
+                System.out.println(entry[0] + ": " + entry[1]);
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("No scores recorded yet.");
         }
     }
 
@@ -49,9 +60,6 @@ public class GamePortal {
         }
     }
 
-    /*
-     * Takes in user input for printing out all games in
-     */
     public static Game getGameChoice() {
         int choice = ErrorCheck.getInt(sc);
         // for it to be numbered, we can't use hashmaps.

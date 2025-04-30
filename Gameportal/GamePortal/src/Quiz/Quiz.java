@@ -15,7 +15,7 @@ public class Quiz implements Game {
         
         @Override
         public String getGameName() {
-            return "Sports Personality Quiz";
+            return "Buzzfeed Sports Quiz";
         }
     
         @Override

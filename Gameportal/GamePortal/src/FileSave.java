@@ -10,13 +10,12 @@ public class FileSave {
     String filename = "scores.csv";
     HashMap<String, String> results = new HashMap();
 
-    // Constructor: loads results as a hash map from filename
+
     FileSave(String filename) throws IOException {
         this.filename = filename;
         loadResults();
     }
 
-    // Constructor: loads results as a hash map from default filename
     FileSave() throws IOException {
         loadResults();
     }
@@ -37,7 +36,7 @@ public class FileSave {
         }
         reader.useDelimiter(",");
         String line = "";
-        while (reader.hasNextLine()) // returns a Boolean value
+        while (reader.hasNextLine())
         {
             line = reader.nextLine();
             String[] person = line.split(","); // use comma as separator
@@ -46,10 +45,9 @@ public class FileSave {
         }
     }
 
-    // update 1 key: value in results
-    // then writes to file
+    
     public void updateResult(String key, String value) throws Exception {
-        /* YOUR CODE HERE: Change this to actually update the results hashmap */
+        
 if (key == null || value == null) {
             throw new IllegalArgumentException("Key and value cannot be null");
         }

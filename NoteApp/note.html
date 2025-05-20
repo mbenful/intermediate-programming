@@ -6,11 +6,24 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app">
-    <h1>My Notes</h1>
-    <textarea id="noteInput" placeholder="Write your note here..."></textarea>
-    <button onclick="saveNote()">Save Note</button>
-    <div id="notesContainer"></div>
+  <div class="notes-sidebar" id="notesContainer"></div>
+  
+  <div class="center-container">
+    <div class="app">
+      <h1>Unfiltered</h1>
+    <h2>This website allows you and your peers to say your hot takes</h2></h2>
+      <textarea id="noteInput" placeholder="Write your note here..."></textarea>
+      <button onclick="saveNote()">Save Note</button>
+    </div>
+    
+    <div class="video-container">
+      <iframe width="330" height="330"
+            src="https://www.youtube.com/embed/sF80I-TQiW0?si=X1a79b7TM7ujnIrB" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+      </iframe>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>

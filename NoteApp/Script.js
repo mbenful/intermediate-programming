@@ -1,4 +1,5 @@
-
+/* copyright 2025 Ahaan Chabba and Peter Benson
+*/
 let noteInput = document.getElementById("noteInput");
 let notesContainer = document.getElementById("notesContainer");
 
